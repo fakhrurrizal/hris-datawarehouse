@@ -5,11 +5,15 @@ import { Button } from '@mui/material'
 import dayjs from 'dayjs'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import SalesOverviewViews from './sales-overview'
-import FilterSales from './sales-overview/filter'
-import { SalesFilterSchema, schemaForm } from './sales-overview/schema'
-import TrendRecruitmenStatisticsChartViews from './sales-statistics'
-import EmployeePerResourcePieChartViews from './top-selling-branch'
+import SalesOverviewViews from './score-card'
+import FilterSales from './score-card/filter'
+import { SalesFilterSchema, schemaForm } from './score-card/schema'
+import TrendRecruitmenStatisticsChartViews from './tren-recruitment'
+import EmployeePerResourcePieChartViews from './employee-per-resource'
+import TrendAveragePerformanceViews from './tren-average-performance'
+import AveragePerformanceScorePerDepartment from './avareage-performance-score-department'
+import EmpSatisfactionPerPosition from './emp-statisfication-per-position'
+import PieChartTerminationRatioView from './pie-chart-termination-ratio-view'
 
 const DashboardUserViewsPage = () => {
     const [open, setOpen] = useState<boolean>(false)
@@ -61,6 +65,18 @@ const DashboardUserViewsPage = () => {
                         </div>
                         <div className='col-span-12 xl:col-span-6'>
                             <EmployeePerResourcePieChartViews startDate={startDate} endDate={endDate} />
+                        </div>
+                        <div className='col-span-12 xl:col-span-6'>
+                            <TrendAveragePerformanceViews startDate={startDate} endDate={endDate} />
+                        </div>
+                        <div className='col-span-12 xl:col-span-6'>
+                            <AveragePerformanceScorePerDepartment startDate={startDate} endDate={endDate} />
+                        </div>
+                        <div className='col-span-12 xl:col-span-6'>
+                            <EmpSatisfactionPerPosition startDate={startDate} endDate={endDate} />
+                        </div>
+                        <div className='col-span-12 xl:col-span-6'>
+                            <PieChartTerminationRatioView startDate={startDate} endDate={endDate} />
                         </div>
                     </div>
                 </section>

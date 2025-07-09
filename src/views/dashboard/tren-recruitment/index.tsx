@@ -1,12 +1,12 @@
-import { CircularProgress } from '@mui/material'
-import dynamic from 'next/dynamic'
-import { useEffect, useState } from 'react'
-import { useDashboardLineChart } from '@/utils/queries/use-report-dashboard'
-import { ApexOptions } from 'apexcharts'
-import { formatToIDR } from '@/utils/helpers/format-number.helper'
+import { ModalCustom } from '@/components/custom-modal'
 import { ScoreCard } from '@/components/dashboard/score-card'
 import EmptyDataTableCustom from '@/components/table/empty-data'
-import { ModalCustom } from '@/components/custom-modal'
+import { formatNumberWithSeparator } from '@/utils/helpers/format-number.helper'
+import { useDashboardLineChart } from '@/utils/queries/use-report-dashboard'
+import { CircularProgress } from '@mui/material'
+import { ApexOptions } from 'apexcharts'
+import dynamic from 'next/dynamic'
+import { useEffect, useState } from 'react'
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
@@ -64,15 +64,15 @@ const TrendRecruitmenStatisticsChartViews = ({ endDate, startDate }: Props) => {
         xaxis: {
             type: 'datetime',
             labels: {
-                format: 'dd MMM yy',
+                format: 'MMM yy',
             },
         },
         tooltip: {
             x: {
-                format: 'dd MMM yyyy',
+                format: 'MMM yyyy',
             },
             y: {
-                formatter: value => formatToIDR(value),
+                formatter: value => formatNumberWithSeparator(value),
             },
         },
         fill: {
