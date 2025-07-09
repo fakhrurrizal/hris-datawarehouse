@@ -1,0 +1,54 @@
+# Ignore build artifacts
+/build
+
+# Ignore configuration files
+.eslintrc.js
+.prettierrc.json
+
+# Ignore dependency directories
+/node_modules
+
+# Ignore distribution directories
+/dist
+
+# Ignore scripts
+/scripts
+
+# Ignore README file
+README.md
+
+# Ignore Next.js directory
+.next
+
+# Ignore Next.js configuration file
+next.config.js
+
+# Ignore package.json file
+# package.json
+
+# Ignore TypeScript declaration files
+# *.d.ts
+
+# Ignore TypeScript configuration file
+# tsconfig.json
+
+# Ignore Jest configuration file
+jest.config.js
+
+# Ignore Git configuration file
+.gitignore
+
+# Ignore Markdown files
+*.md
+
+# Ignore Yarn lockfile
+yarn.lock
+
+# Ignore npm shrinkwrap file
+npm-shrinkwrap.json
+
+# Ignore package-lock.json
+package-lock.json
+
+# Ignore .env file
+# .env

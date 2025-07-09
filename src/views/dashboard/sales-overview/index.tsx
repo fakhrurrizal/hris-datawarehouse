@@ -1,0 +1,62 @@
+import { ScoreCardItem } from '@/components/dashboard/score-card'
+import { formatNumberWithSeparator } from '@/utils/helpers/format-number.helper'
+import { useDashboardScoreCard } from '@/utils/queries/use-report-dashboard'
+
+interface Props {
+    startDate: string
+    endDate: string
+}
+const SalesOverviewViews = ({ startDate, endDate }: Props) => {
+    const { data: data_filter } = useDashboardScoreCard({
+        start_date: startDate,
+        end_date: endDate,
+    })
+
+    const classNameCard = 'col-span-12 xl:col-span-3'
+    const classNameDiv = 'grid grid-cols-12  gap-3 items-stretch'
+
+    return (
+        <>
+            <div className={classNameDiv}>
+                <div className={classNameCard}>
+                    <ScoreCardItem
+                        title='Total Karyawan Aktif'
+                        value={formatNumberWithSeparator(data_filter?.total_employee)}
+                        icon='mdi:account-group'
+                        iconColor='#38bdf8'
+                        bgColor='#e0f2fe'
+                    />
+                </div>
+                <div className={classNameCard}>
+                    <ScoreCardItem
+                        title='Tingkat Turnover (%)'
+                        value={`${data_filter?.turnover_percentage}%`}
+                        icon='tabler:repeat-off'
+                        iconColor='#facc15'
+                        bgColor='#fef9c3'
+                    />
+                </div>
+                <div className={classNameCard}>
+                    <ScoreCardItem
+                        title='Rata-rata Skor Performance'
+                        value={`${data_filter?.average_performance}%`}
+                        icon='mdi:chart-line'
+                        iconColor='#22c55e'
+                        bgColor='#dcfce7'
+                    />
+                </div>
+                <div className={classNameCard}>
+                    <ScoreCardItem
+                        title='Rata-rata Absensi Terlambat 30 Hari Terakhir'
+                        value={`${data_filter?.average_days_late_last30}%`}
+                        icon='mdi:clock-alert-outline'
+                        iconColor='#ef4444'
+                        bgColor='#fee2e2'
+                    />
+                </div>
+            </div>
+        </>
+    )
+}
+
+export default SalesOverviewViews
