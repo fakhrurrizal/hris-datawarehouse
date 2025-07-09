@@ -33,13 +33,16 @@ const FilterSales = ({ open, setStartDate, setEndDate, toggle, form }: Props) =>
     }
 
     const handleDelete = () => {
-        queryClient.invalidateQueries({ queryKey: ['LIST_DASHBOARD_SALE_BRANCH'] })
-        queryClient.invalidateQueries({ queryKey: ['LIST_DASHBOARD_LINE_CHART'] })
         queryClient.invalidateQueries({ queryKey: ['LIST_DASHBOARD_SCORECARD'] })
-        queryClient.invalidateQueries({ queryKey: ['LIST_DASHBOARD_PRODUCT_SOLD_CHART'] })
+        queryClient.invalidateQueries({ queryKey: ['LIST_DASHBOARD_LINE_CHART'] })
+        queryClient.invalidateQueries({ queryKey: ['LIST_DASHBOARD_EMPLOYEE_PER_RECRUITMENT_SOURCE'] })
+        queryClient.invalidateQueries({ queryKey: ['LIST_DASHBOARD_LINE_CHART_performance_score'] })
+        queryClient.invalidateQueries({ queryKey: ['LIST_DASHBOARD_AVERAGE_PERFORMANCE_SCORE_PER_DEPARTMENT'] })
+        queryClient.invalidateQueries({ queryKey: ['LIST_DASHBOARD_EMP_SATISFACTION_PER_POSITION'] })
+        queryClient.invalidateQueries({ queryKey: ['LIST_DASHBOARD_PIE_CHART_EMPLOYEE_TERMINATION_RATIO'] })
 
-        const defaultStart = dayjs().subtract(1, 'week').format('YYYY-MM-DD')
-        const defaultEnd = dayjs().format('YYYY-MM-DD')
+        const defaultStart = ''
+        const defaultEnd = ''
 
         reset({
             branch_id: null,
