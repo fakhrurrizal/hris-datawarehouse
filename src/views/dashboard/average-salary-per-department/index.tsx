@@ -52,7 +52,7 @@ const AverageSalaryPerDepartmentViews = ({ startDate, endDate }: Props) => {
         plotOptions: {
             bar: {
                 horizontal: false,
-                borderRadius: 9, 
+                borderRadius: 9,
                 barHeight: '60%',
             },
         },
@@ -60,10 +60,18 @@ const AverageSalaryPerDepartmentViews = ({ startDate, endDate }: Props) => {
         xaxis: {
             categories,
             title: {
+                text: 'Departemen',
+            },
+            labels: {
+                formatter: (val) => `${val}`,
+            },
+        },
+        yaxis: {
+            title: {
                 text: 'Gaji (USD)',
             },
             labels: {
-                formatter: (val) => `$${val}`,
+                formatter: (val) => `$${val.toLocaleString()}`,
             },
         },
         tooltip: {
