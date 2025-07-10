@@ -154,5 +154,109 @@ export const useDashboardPieChartEmployeeTerminationRatio = (args: any) => {
 }
 
 
+export const useDashboardAverageSalaryPerPosition = (args: any) => {
+    const query: Record<string, string | number> = {
+        ...args,
+    }
+
+    const endpoint = queryString.stringifyUrl({
+        url: getApi('dashboard') + '/barchart-average-salary-per-position',
+        query,
+    })
+
+    return useQuery({
+        queryFn: async () => {
+            const res = await axiosInterceptor.get(endpoint)
+
+            return res?.data
+        },
+        refetchOnWindowFocus: false,
+        queryKey: ['LIST_DASHBOARD_AVERAGE_SALARY_PER_POSITION', query, args],
+    })
+}
 
 
+export const useDashboardAverageSalaryPerDepartment = (args: any) => {
+    const query: Record<string, string | number> = {
+        ...args,
+    }
+
+    const endpoint = queryString.stringifyUrl({
+        url: getApi('dashboard') + '/barchart-average-salary-per-department',
+        query,
+    })
+
+    return useQuery({
+        queryFn: async () => {
+            const res = await axiosInterceptor.get(endpoint)
+
+            return res?.data
+        },
+        refetchOnWindowFocus: false,
+        queryKey: ['LIST_DASHBOARD_AVERAGE_SALARY_PER_DEPARTMENT', query, args],
+    })
+}
+
+
+export const useDashboarEmployeePerDepartment = (args: any) => {
+    const query: Record<string, string | number> = {
+        ...args,
+    }
+
+    const endpoint = queryString.stringifyUrl({
+        url: getApi('dashboard') + '/barchart-employee-per-department',
+        query,
+    })
+
+    return useQuery({
+        queryFn: async () => {
+            const res = await axiosInterceptor.get(endpoint)
+
+            return res?.data
+        },
+        refetchOnWindowFocus: false,
+        queryKey: ['LIST_DASHBOARD_EMPLOYEE_PER_DEPARTMENT', query, args],
+    })
+}
+
+export const useDashboarEmployeePerPosition = (args: any) => {
+    const query: Record<string, string | number> = {
+        ...args,
+    }
+
+    const endpoint = queryString.stringifyUrl({
+        url: getApi('dashboard') + '/barchart-employee-per-position',
+        query,
+    })
+
+    return useQuery({
+        queryFn: async () => {
+            const res = await axiosInterceptor.get(endpoint)
+
+            return res?.data
+        },
+        refetchOnWindowFocus: false,
+        queryKey: ['LIST_DASHBOARD_EMPLOYEE_PER_POSITION', query, args],
+    })
+}
+
+export const useSalaryComparison = (args: any) => {
+    const query: Record<string, string | number> = {
+        ...args,
+    }
+
+    const endpoint = queryString.stringifyUrl({
+        url: getApi('dashboard') + '/highest-lowest-salary',
+        query,
+    })
+
+    return useQuery({
+        queryFn: async () => {
+            const res = await axiosInterceptor.get(endpoint)
+
+            return res?.data
+        },
+        refetchOnWindowFocus: false,
+        queryKey: ['LIST_DASHBOARD_SALARY_COMPARISON', query, args],
+    })
+}

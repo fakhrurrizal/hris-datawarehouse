@@ -1,5 +1,5 @@
 import IconifyIcon from '@/components/icon'
-import { Button, Card } from '@mui/material'
+import { Button, Card, Skeleton } from '@mui/material'
 import { Fragment, ReactNode } from 'react'
 
 interface ScoreCardProps {
@@ -75,6 +75,7 @@ interface ScoreCardItemProps {
     iconColor: string
     bgColor: string
     classNameValue?: string
+    isLoading?:boolean
 }
 
 export const ScoreCardItem = (props: ScoreCardItemProps) => {
@@ -85,22 +86,23 @@ export const ScoreCardItem = (props: ScoreCardItemProps) => {
         iconColor = 'blue-800',
         bgColor = 'blue-300',
         classNameValue,
+        isLoading = false,
     } = props
 
     return (
         <Fragment>
             <Card className='w-full h-full p-5 rounded-lg border-[1px] shadow-md drop-shadow-md flex'>
                 <div className='flex gap-2 items-center'>
-                    {/* icon */}
                     <div className={`p-3.5 rounded-lg`} style={{ backgroundColor: bgColor }}>
                         <IconifyIcon icon={icon} fontSize={20} color={iconColor} />
                     </div>
-                    {/* icon end */}
-
-                    {/* data */}
                     <div className='flex-col gap-1 w-full'>
                         <p className='text-xs 2xl:text-sm font-medium'>{title}</p>
-                        <p className={`md:text-sm 2xl:text-base font-bold ${classNameValue}`}>{value}</p>
+                        {isLoading ? (
+                            <Skeleton width={80} height={24} variant="text" />
+                        ) : (
+                            <p className={`md:text-sm 2xl:text-base font-bold ${classNameValue}`}>{value}</p>
+                        )}
                     </div>
                     {/* data end */}
                 </div>

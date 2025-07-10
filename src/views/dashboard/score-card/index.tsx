@@ -7,7 +7,7 @@ interface Props {
     endDate: string
 }
 const SalesOverviewViews = ({ startDate, endDate }: Props) => {
-    const { data: data_filter } = useDashboardScoreCard({
+    const { data: data_filter, isLoading } = useDashboardScoreCard({
         start_date: startDate,
         end_date: endDate,
     })
@@ -25,6 +25,7 @@ const SalesOverviewViews = ({ startDate, endDate }: Props) => {
                         icon='mdi:account-group'
                         iconColor='#38bdf8'
                         bgColor='#e0f2fe'
+                        isLoading={isLoading}
                     />
                 </div>
                 <div className={classNameCard}>
@@ -34,6 +35,7 @@ const SalesOverviewViews = ({ startDate, endDate }: Props) => {
                         icon='tabler:repeat-off'
                         iconColor='#facc15'
                         bgColor='#fef9c3'
+                        isLoading={isLoading}
                     />
                 </div>
                 <div className={classNameCard}>
@@ -43,6 +45,7 @@ const SalesOverviewViews = ({ startDate, endDate }: Props) => {
                         icon='mdi:chart-line'
                         iconColor='#22c55e'
                         bgColor='#dcfce7'
+                        isLoading={isLoading}
                     />
                 </div>
                 <div className={classNameCard}>
@@ -52,6 +55,7 @@ const SalesOverviewViews = ({ startDate, endDate }: Props) => {
                         icon='mdi:clock-alert-outline'
                         iconColor='#ef4444'
                         bgColor='#fee2e2'
+                        isLoading={isLoading}
                     />
                 </div>
             </div>

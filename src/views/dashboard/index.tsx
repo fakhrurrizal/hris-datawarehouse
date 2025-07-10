@@ -5,15 +5,21 @@ import { Button } from '@mui/material'
 import dayjs from 'dayjs'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import SalesOverviewViews from './score-card'
-import FilterSales from './score-card/filter'
 import { SalesFilterSchema, schemaForm } from './score-card/schema'
-import TrendRecruitmenStatisticsChartViews from './tren-recruitment'
-import EmployeePerResourcePieChartViews from './employee-per-resource'
-import TrendAveragePerformanceViews from './tren-average-performance'
-import AveragePerformanceScorePerDepartment from './avareage-performance-score-department'
-import EmpSatisfactionPerPosition from './emp-statisfication-per-position'
-import PieChartTerminationRatioView from './pie-chart-termination-ratio-view'
+import dynamic from 'next/dynamic'
+
+const SalesOverviewViews = dynamic(() => import('./score-card'), { ssr: false })
+const FilterSales = dynamic(() => import('./score-card/filter'), { ssr: false })
+const TrendRecruitmenStatisticsChartViews = dynamic(() => import('./tren-recruitment'), { ssr: false })
+const EmployeePerResourcePieChartViews = dynamic(() => import('./employee-per-resource'), { ssr: false })
+const TrendAveragePerformanceViews = dynamic(() => import('./tren-average-performance'), { ssr: false })
+const AveragePerformanceScorePerDepartment = dynamic(() => import('./avareage-performance-score-department'), { ssr: false })
+const EmpSatisfactionPerPosition = dynamic(() => import('./emp-statisfication-per-position'), { ssr: false })
+const PieChartTerminationRatioView = dynamic(() => import('./pie-chart-termination-ratio-view'), { ssr: false })
+const AverageSalaryPerDepartmentViews = dynamic(() => import('./average-salary-per-department'), { ssr: false })
+const AverageSalaryPerPositionViews = dynamic(() => import('./average-salary-per-position'), { ssr: false })
+const EmployeePerDepartmentWordCloudView = dynamic(() => import('./wordcloud-employee-per-depertment'), { ssr: false })
+const SalaryComparisonPieView = dynamic(() => import('./pie-chart-comparison-salary'), { ssr: false })
 
 const DashboardUserViewsPage = () => {
     const [open, setOpen] = useState<boolean>(false)
@@ -78,6 +84,20 @@ const DashboardUserViewsPage = () => {
                         <div className='col-span-12 xl:col-span-6'>
                             <PieChartTerminationRatioView startDate={startDate} endDate={endDate} />
                         </div>
+                        <div className='col-span-12 xl:col-span-6'>
+                            <AverageSalaryPerDepartmentViews startDate={startDate} endDate={endDate} />
+                        </div>
+                        <div className='col-span-12 xl:col-span-6'>
+                            <EmployeePerDepartmentWordCloudView startDate={startDate} endDate={endDate} />
+                        </div>
+
+                        <div className='col-span-12 xl:col-span-6'>
+                            <AverageSalaryPerPositionViews startDate={startDate} endDate={endDate} />
+                        </div>
+                        <div className='col-span-12 xl:col-span-6'>
+                            <SalaryComparisonPieView startDate={startDate} endDate={endDate} />
+                        </div>
+
                     </div>
                 </section>
             </main>
