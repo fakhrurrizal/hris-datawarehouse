@@ -14,12 +14,12 @@ const TrendRecruitmenStatisticsChartViews = dynamic(() => import('./tren-recruit
 const EmployeePerResourcePieChartViews = dynamic(() => import('./employee-per-resource'), { ssr: false })
 const TrendAveragePerformanceViews = dynamic(() => import('./tren-average-performance'), { ssr: false })
 const AveragePerformanceScorePerDepartment = dynamic(() => import('./avareage-performance-score-department'), { ssr: false })
-const EmpSatisfactionPerPosition = dynamic(() => import('./emp-statisfication-per-position'), { ssr: false })
 const PieChartTerminationRatioView = dynamic(() => import('./pie-chart-termination-ratio-view'), { ssr: false })
 const AverageSalaryPerDepartmentViews = dynamic(() => import('./average-salary-per-department'), { ssr: false })
 const AverageSalaryPerPositionViews = dynamic(() => import('./average-salary-per-position'), { ssr: false })
-const EmployeePerDepartmentWordCloudView = dynamic(() => import('./wordcloud-employee-per-depertment'), { ssr: false })
-const SalaryComparisonPieView = dynamic(() => import('./pie-chart-comparison-salary'), { ssr: false })
+// const SalaryComparisonPieView = dynamic(() => import('./pie-chart-comparison-salary'), { ssr: false })
+const EmployeePerDepartmentViews = dynamic(() => import('./barchart-employee-per-department'), { ssr: false })
+const EmployeePerGenderPieChartViews = dynamic(() => import('./pie-chart-employee-per-gender'), { ssr: false })
 
 const DashboardUserViewsPage = () => {
     const [open, setOpen] = useState<boolean>(false)
@@ -66,37 +66,44 @@ const DashboardUserViewsPage = () => {
                         <div className='col-span-12 '>
                             <SalesOverviewViews startDate={startDate} endDate={endDate} />
                         </div>
+
+                        <div className='col-span-12 xl:col-span-6'>
+                            <EmployeePerDepartmentViews startDate={startDate} endDate={endDate} />
+                        </div>
+                        <div className='col-span-12 xl:col-span-6'>
+                            <EmployeePerGenderPieChartViews startDate={startDate} endDate={endDate} />
+                        </div>
+
                         <div className='col-span-12 xl:col-span-6'>
                             <TrendRecruitmenStatisticsChartViews startDate={startDate} endDate={endDate} />
                         </div>
                         <div className='col-span-12 xl:col-span-6'>
                             <EmployeePerResourcePieChartViews startDate={startDate} endDate={endDate} />
                         </div>
-                        <div className='col-span-12 xl:col-span-6'>
+                        <div className='col-span-12'>
                             <TrendAveragePerformanceViews startDate={startDate} endDate={endDate} />
-                        </div>
-                        <div className='col-span-12 xl:col-span-6'>
-                            <AveragePerformanceScorePerDepartment startDate={startDate} endDate={endDate} />
-                        </div>
-                        <div className='col-span-12 xl:col-span-6'>
-                            <EmpSatisfactionPerPosition startDate={startDate} endDate={endDate} />
-                        </div>
-                        <div className='col-span-12 xl:col-span-6'>
-                            <PieChartTerminationRatioView startDate={startDate} endDate={endDate} />
                         </div>
                         <div className='col-span-12 xl:col-span-6'>
                             <AverageSalaryPerDepartmentViews startDate={startDate} endDate={endDate} />
                         </div>
                         <div className='col-span-12 xl:col-span-6'>
-                            <EmployeePerDepartmentWordCloudView startDate={startDate} endDate={endDate} />
+                            <AverageSalaryPerPositionViews startDate={startDate} endDate={endDate} />
                         </div>
 
                         <div className='col-span-12 xl:col-span-6'>
-                            <AverageSalaryPerPositionViews startDate={startDate} endDate={endDate} />
+                            <AveragePerformanceScorePerDepartment startDate={startDate} endDate={endDate} />
                         </div>
+                     
                         <div className='col-span-12 xl:col-span-6'>
-                            <SalaryComparisonPieView startDate={startDate} endDate={endDate} />
+                            <PieChartTerminationRatioView startDate={startDate} endDate={endDate} />
                         </div>
+
+                     
+
+
+                        {/* <div className='col-span-12 xl:col-span-6'>
+                            <SalaryComparisonPieView startDate={startDate} endDate={endDate} />
+                        </div> */}
 
                     </div>
                 </section>

@@ -28,49 +28,72 @@ const EmpSatisfactionPerPosition = ({ startDate, endDate }: Props) => {
         end_date: endDate,
     })
 
-    const [series, setSeries] = useState([{ name: 'Satisfaction', data: [] as number[] }])
-    const [categories, setCategories] = useState<string[]>([])
+    const [series, setSeries] = useState<{ name: string; data: { x: string; y: number }[] }[]>([])
 
     useEffect(() => {
         if (!data_filter || data_filter.length === 0) return
 
-        const sorted = [...data_filter].sort((a: any, b: any) => b.total - a.total)
+        const grouped: { [key: string]: { x: string; y: number }[] } = {}
 
-        const data = sorted.map((item: any) => parseFloat(item.total.toFixed(2)))
-        const labels = sorted.map((item: any) => item.name)
+        data_filter.forEach((item: any) => {
+            const position = item.x
+            const period = item.y
+            const value = item.value
 
-        setSeries([{ name: 'Rata-rata Satisfaction', data }])
-        setCategories(labels)
+            if (!grouped[position]) {
+                grouped[position] = []
+            }
+
+            grouped[position].push({ x: period, y: parseFloat(value.toFixed(2)) })
+        })
+
+        const heatmapSeries = Object.keys(grouped).map(position => ({
+            name: position,
+            data: grouped[position],
+        }))
+
+        setSeries(heatmapSeries)
     }, [data_filter])
+
 
     const options: ApexOptions = {
         chart: {
-            type: 'bar',
+            type: 'heatmap',
             toolbar: { show: true },
         },
         plotOptions: {
-            bar: {
-                horizontal: true,
-                barHeight: '50%',
+            heatmap: {
+                shadeIntensity: 0.5,
+                radius: 4,
+                useFillColorAsStroke: true,
+                colorScale: {
+                    ranges: [
+                        { from: 0, to: 2, name: 'Rendah', color: '#FF4560' },
+                        { from: 2.1, to: 3.5, name: 'Sedang', color: '#FEB019' },
+                        { from: 3.6, to: 5, name: 'Tinggi', color: '#00E396' },
+                    ],
+                },
             },
         },
         dataLabels: {
             enabled: true,
-            formatter: (val) => `${val}`,
-        },
-        xaxis: {
-            categories,
-            title: {
-                text: 'Rata-rata Satisfaction',
-            },
         },
         tooltip: {
             y: {
                 formatter: (val) => `${val} / 5`,
             },
         },
+        xaxis: {
+            type: 'category',
+            labels: {
+                rotate: -45,
+                style: {
+                    fontSize: '12px',
+                },
+            },
+        },
         legend: {
-            show: false,
+            position: 'bottom',
         },
     }
 
@@ -82,7 +105,7 @@ const EmpSatisfactionPerPosition = ({ startDate, endDate }: Props) => {
                         <CircularProgress />
                     ) : data_filter && data_filter.length > 0 ? (
                         <div className='h-full w-full'>
-                            <Chart options={options} series={series} type='bar' height={500} />
+                            <Chart options={options} series={series} type='heatmap' height={500} />
                         </div>
                     ) : (
                         <EmptyDataTableCustom />
@@ -100,7 +123,7 @@ const EmpSatisfactionPerPosition = ({ startDate, endDate }: Props) => {
                         toggleFilter={toggle}
                     >
                         <div className='bg-white mt-5'>
-                            <Chart options={options} series={series} type='bar' height={600} />
+                            <Chart options={options} series={series} type='heatmap' height={600} />
                         </div>
                     </ScoreCard>
                 </ModalCustom>

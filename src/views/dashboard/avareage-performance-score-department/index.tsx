@@ -34,9 +34,9 @@ const AveragePerformanceScorePerDepartment = ({ startDate, endDate }: Props) => 
     useEffect(() => {
         if (!data_filter || data_filter.length === 0) return
 
-        const sorted = [...data_filter].sort((a: any, b: any) => b.count - a.count)
+        const sorted = [...data_filter].sort((a: any, b: any) => b.total - a.total)
 
-        const data = sorted.map((item: any) => item.count)
+        const data = sorted.map((item: any) => item.total)
         const labels = sorted.map((item: any) => item.name)
 
         setSeries([{ name: 'Jumlah Karyawan', data }])
@@ -50,10 +50,13 @@ const AveragePerformanceScorePerDepartment = ({ startDate, endDate }: Props) => 
         },
         plotOptions: {
             bar: {
-                horizontal: true,
+                horizontal: false,
+                borderRadius: 15,
+                borderRadiusApplication: 'end',
                 barHeight: '60%',
             },
         },
+        colors: ['#ffb119'],
         dataLabels: {
             enabled: true,
             formatter: (val) => `${val}`,
@@ -76,7 +79,7 @@ const AveragePerformanceScorePerDepartment = ({ startDate, endDate }: Props) => 
 
     return (
         <>
-            <ScoreCard title='Rata-rata Performance Score per Department' type='chart' toggleZoom={toggleModal} toggleFilter={toggle}>
+            <ScoreCard title='Top 10 Departemen dengan Jumlah Penghentian Tertinggi' type='chart' toggleZoom={toggleModal} toggleFilter={toggle}>
                 <div className='bg-white mt-2 flex justify-center items-center'>
                     {isLoading ? (
                         <CircularProgress />
@@ -94,7 +97,7 @@ const AveragePerformanceScorePerDepartment = ({ startDate, endDate }: Props) => 
                 <ModalCustom maxWidth='lg' title='' toggle={toggleModal} hiddenClose open={openModal} hideButton>
                     <ScoreCard
                         zoom={openModal}
-                        title='Rata-rata Performance Score per Department'
+                        title=''
                         type='chart'
                         toggleZoom={toggleModal}
                         toggleFilter={toggle}

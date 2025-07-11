@@ -95,7 +95,7 @@ export const useDashboardAveragePerformanceScorePerDepartment = (args: any) => {
     }
 
     const endpoint = queryString.stringifyUrl({
-        url: getApi('dashboard') + '/average-performance-score-per-department',
+        url: getApi('dashboard') + '/top-10-termination-departments',
         query,
     })
 
@@ -116,7 +116,7 @@ export const useDashboardEmpSatisfactionPerPosition = (args: any) => {
     }
 
     const endpoint = queryString.stringifyUrl({
-        url: getApi('dashboard') + '/barchart-average-emp-satisfaction-per-position',
+        url: getApi('dashboard') + '/heatmap-average-emp-satisfaction-per-position',
         query,
     })
 
@@ -130,7 +130,6 @@ export const useDashboardEmpSatisfactionPerPosition = (args: any) => {
         queryKey: ['LIST_DASHBOARD_EMP_SATISFACTION_PER_POSITION', query, args],
     })
 }
-
 
 export const useDashboardPieChartEmployeeTerminationRatio = (args: any) => {
     const query: Record<string, string | number> = {
@@ -153,7 +152,6 @@ export const useDashboardPieChartEmployeeTerminationRatio = (args: any) => {
     })
 }
 
-
 export const useDashboardAverageSalaryPerPosition = (args: any) => {
     const query: Record<string, string | number> = {
         ...args,
@@ -175,7 +173,6 @@ export const useDashboardAverageSalaryPerPosition = (args: any) => {
     })
 }
 
-
 export const useDashboardAverageSalaryPerDepartment = (args: any) => {
     const query: Record<string, string | number> = {
         ...args,
@@ -196,7 +193,6 @@ export const useDashboardAverageSalaryPerDepartment = (args: any) => {
         queryKey: ['LIST_DASHBOARD_AVERAGE_SALARY_PER_DEPARTMENT', query, args],
     })
 }
-
 
 export const useDashboarEmployeePerDepartment = (args: any) => {
     const query: Record<string, string | number> = {
@@ -258,5 +254,26 @@ export const useSalaryComparison = (args: any) => {
         },
         refetchOnWindowFocus: false,
         queryKey: ['LIST_DASHBOARD_SALARY_COMPARISON', query, args],
+    })
+}
+
+export const useDashboardEmployeePerGender = (args: any) => {
+    const query: Record<string, string | number> = {
+        ...args,
+    }
+
+    const endpoint = queryString.stringifyUrl({
+        url: getApi('dashboard') + '/barchart-employee-per-gender',
+        query,
+    })
+
+    return useQuery({
+        queryFn: async () => {
+            const res = await axiosInterceptor.get(endpoint)
+
+            return res?.data
+        },
+        refetchOnWindowFocus: false,
+        queryKey: ['LIST_DASHBOARD_EMPLOYEE_PER_GENDER', query, args],
     })
 }

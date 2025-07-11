@@ -59,12 +59,12 @@ const PieChartTerminationRatioView = ({ startDate, endDate }: Props) => {
     return (
         <>
             <ScoreCard
-                title='Rasio Alasan Terminasi'
+                title='Rasio Alasan Penghentian'
                 type='chart'
                 toggleZoom={toggleModal}
                 toggleFilter={toggle}
             >
-                <div className='bg-white mt-2 flex justify-center items-center px-6 py-4'>
+                <div className='bg-white mt-2 flex justify-center items-center px-6 py-4  '>
                     {isLoading ? (
                         <CircularProgress />
                     ) : data && data.length > 0 ? (
@@ -88,7 +88,7 @@ const PieChartTerminationRatioView = ({ startDate, endDate }: Props) => {
                 >
                     <ScoreCard
                         zoom={openModal}
-                        title='Rasio Alasan Terminasi'
+                        title='Rasio Alasan Penghentian'
                         type='chart'
                         toggleZoom={toggleModal}
                         toggleFilter={toggle}
@@ -99,6 +99,8 @@ const PieChartTerminationRatioView = ({ startDate, endDate }: Props) => {
                     </ScoreCard>
                 </ModalCustom>
             )}
+
+
         </>
     )
 }

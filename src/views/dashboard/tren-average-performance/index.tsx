@@ -96,7 +96,7 @@ const TrendAveragePerformanceViews = ({ endDate, startDate }: Props) => {
 
     return (
         <>
-            <ScoreCard title='Tren Performance Score' type='chart' toggleZoom={toggleModal} toggleFilter={toggle}>
+            <ScoreCard title='Tren Skor Kinerja Karyawan' type='chart' toggleZoom={toggleModal} toggleFilter={toggle}>
                 <div className='bg-white mt-2 flex justify-center items-center'>
                     {isLoading ? (
                         <CircularProgress />
@@ -118,7 +118,7 @@ const TrendAveragePerformanceViews = ({ endDate, startDate }: Props) => {
                 <ModalCustom maxWidth='lg' title='' toggle={toggleModal} hiddenClose open={openModal} hideButton>
                     <ScoreCard
                         zoom={openModal}
-                        title='Tren Performance Score'
+                        title='Tren Skor Kinerja Karyawan'
                         type='chart'
                         toggleZoom={toggleModal}
                         toggleFilter={toggle}

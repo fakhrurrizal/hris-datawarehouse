@@ -17,9 +17,9 @@ interface Props {
 }
 
 const options = [
-    { label: 'Hari Ini', value: dayjs().format('YYYY-MM-DD') },
-    { label: '1 Minggu', value: dayjs().subtract(1, 'week').format('YYYY-MM-DD') },
-    { label: '1 Bulan', value: dayjs().subtract(1, 'month').format('YYYY-MM-DD') },
+    { label: '1 Bulan Terakhir', value: dayjs().subtract(1, 'month').format('YYYY-MM-DD') },
+    { label: '1 Tahun Terakhir', value: dayjs().subtract(1, 'year').format('YYYY-MM-DD') },
+    { label: '3 Tahun Terakhir', value: dayjs().subtract(3, 'year').format('YYYY-MM-DD') },
     { label: 'Custom', value: 'custom' },
 ]
 
@@ -48,7 +48,7 @@ const FilterSales = ({ open, setStartDate, setEndDate, toggle, form }: Props) =>
             branch_id: null,
             start_date: defaultStart,
             end_date: defaultEnd,
-            range: { label: '1 Minggu', value: defaultStart },
+            range: { label: '1 Bulan Terakhir', value: defaultStart },
         })
 
         setStartDate(defaultStart)
