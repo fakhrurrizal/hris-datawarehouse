@@ -14,11 +14,12 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 interface Props {
     startDate: string
     endDate: string
+    departmentId: number
 }
 
 
 
-const AverageSalaryPerPositionViews = ({ startDate, endDate }: Props) => {
+const AverageSalaryPerPositionViews = ({ startDate, endDate, departmentId }: Props) => {
     const [open, setOpen] = useState(false)
     const [openModal, setOpenModal] = useState(false)
 
@@ -28,6 +29,7 @@ const AverageSalaryPerPositionViews = ({ startDate, endDate }: Props) => {
     const { data: data_filter, isLoading } = useDashboardAverageSalaryPerPosition({
         start_date: startDate,
         end_date: endDate,
+        department_id: departmentId
     })
 
     const [series, setSeries] = useState([{ name: 'Gaji Rata-rata', data: [] as number[] }])

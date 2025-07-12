@@ -20,6 +20,7 @@ const AverageSalaryPerPositionViews = dynamic(() => import('./average-salary-per
 // const SalaryComparisonPieView = dynamic(() => import('./pie-chart-comparison-salary'), { ssr: false })
 const EmployeePerDepartmentViews = dynamic(() => import('./barchart-employee-per-department'), { ssr: false })
 const EmployeePerGenderPieChartViews = dynamic(() => import('./pie-chart-employee-per-gender'), { ssr: false })
+const TableFactEmployment = dynamic(() => import('./table_fact_employee'), { ssr: false })
 
 const DashboardUserViewsPage = () => {
     const [open, setOpen] = useState<boolean>(false)
@@ -31,6 +32,8 @@ const DashboardUserViewsPage = () => {
     const [startDate, setStartDate] = useState<string>('')
 
     const [endDate, setEndDate] = useState<string>('')
+
+    const [department, setDepartment] = useState<string>('')
 
     const form = useForm<schemaForm>({
         defaultValues: {
@@ -64,46 +67,44 @@ const DashboardUserViewsPage = () => {
                 <section className='mt-5'>
                     <div className='grid grid-cols-12 xl:grid-cols-10 gap-5 items-stretch'>
                         <div className='col-span-12 '>
-                            <SalesOverviewViews startDate={startDate} endDate={endDate} />
+                            <SalesOverviewViews startDate={startDate} endDate={endDate} departmentId={Number(department)} />
                         </div>
 
                         <div className='col-span-12 xl:col-span-6'>
-                            <EmployeePerDepartmentViews startDate={startDate} endDate={endDate} />
+                            <EmployeePerDepartmentViews startDate={startDate} endDate={endDate} departmentId={Number(department)} />
                         </div>
                         <div className='col-span-12 xl:col-span-6'>
-                            <EmployeePerGenderPieChartViews startDate={startDate} endDate={endDate} />
+                            <EmployeePerGenderPieChartViews startDate={startDate} endDate={endDate} departmentId={Number(department)} />
                         </div>
 
                         <div className='col-span-12 xl:col-span-6'>
-                            <TrendRecruitmenStatisticsChartViews startDate={startDate} endDate={endDate} />
+                            <TrendRecruitmenStatisticsChartViews startDate={startDate} endDate={endDate} departmentId={Number(department)} />
                         </div>
                         <div className='col-span-12 xl:col-span-6'>
-                            <EmployeePerResourcePieChartViews startDate={startDate} endDate={endDate} />
+                            <EmployeePerResourcePieChartViews startDate={startDate} endDate={endDate} departmentId={Number(department)} />
                         </div>
                         <div className='col-span-12'>
-                            <TrendAveragePerformanceViews startDate={startDate} endDate={endDate} />
+                            <TrendAveragePerformanceViews startDate={startDate} endDate={endDate} departmentId={Number(department)} />
                         </div>
                         <div className='col-span-12 xl:col-span-6'>
-                            <AverageSalaryPerDepartmentViews startDate={startDate} endDate={endDate} />
+                            <AverageSalaryPerDepartmentViews startDate={startDate} endDate={endDate} departmentId={Number(department)} />
                         </div>
                         <div className='col-span-12 xl:col-span-6'>
-                            <AverageSalaryPerPositionViews startDate={startDate} endDate={endDate} />
+                            <AverageSalaryPerPositionViews startDate={startDate} endDate={endDate} departmentId={Number(department)} />
                         </div>
 
                         <div className='col-span-12 xl:col-span-6'>
-                            <AveragePerformanceScorePerDepartment startDate={startDate} endDate={endDate} />
+                            <AveragePerformanceScorePerDepartment startDate={startDate} endDate={endDate} departmentId={Number(department)} />
                         </div>
-                     
+
                         <div className='col-span-12 xl:col-span-6'>
-                            <PieChartTerminationRatioView startDate={startDate} endDate={endDate} />
+                            <PieChartTerminationRatioView startDate={startDate} endDate={endDate} departmentId={Number(department)} />
                         </div>
 
-                     
 
-
-                        {/* <div className='col-span-12 xl:col-span-6'>
-                            <SalaryComparisonPieView startDate={startDate} endDate={endDate} />
-                        </div> */}
+                        <div className='col-span-12 '>
+                            <TableFactEmployment startDate={startDate} endDate={endDate} departmentId={Number(department)} />
+                        </div>
 
                     </div>
                 </section>
@@ -115,6 +116,7 @@ const DashboardUserViewsPage = () => {
                     setEndDate={setEndDate}
                     form={form}
                     toggle={toggle}
+                    setDepartment={setDepartment}
                 />
             )}
         </>

@@ -3,16 +3,15 @@ import { z } from 'zod'
 export const SalesFilterSchema = z
     .object({
         range: z.object({
-            label: z.string().min(1, { message: 'wajib diisi' }),
-            value: z.string(),
+            label: z.string().optional(),
+            value: z.string().optional(),
         }),
         start_date: z.string().optional(),
         end_date: z.string().optional(),
-        branch_id: z
+        department_id: z
             .object({
-                id: z.number(),
-                label: z.string(),
-                name: z.string(),
+                id: z.number().optional(),
+                label: z.string().optional(),
             })
             .nullable()
             .optional(),
@@ -24,6 +23,10 @@ export const SalesFilterSchema = z
             newData.start_date = data.start_date
         } else {
             newData.start_date = data.range.value
+        }
+
+        if (data.department_id) {
+            newData.department_id = data.department_id.id
         }
 
         return data

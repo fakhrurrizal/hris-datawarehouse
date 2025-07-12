@@ -27,7 +27,8 @@ const SalaryComparisonPieView = ({ startDate, endDate }: Props) => {
     const toggleModal = () => setOpenModal(!openModal)
     const { data, isLoading } = useSalaryComparison({
         start_date: startDate,
-        end_date: endDate
+        end_date: endDate,
+        
     })
     const [series, setSeries] = useState<number[]>([])
     const [labels, setLabels] = useState<string[]>([])

@@ -5,11 +5,6 @@ export const endpoints = {
     login: 'auth/signin',
     register: 'auth/signup',
     dashboard: 'dashboard',
-
-    // blog
-    blog: 'blog',
-    blog_category: 'blog/category',
-
-    // files
-    file: 'file',
+    dim: 'dim',
+    dim_department: 'dim/department',
 } as const

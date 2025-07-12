@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useEffect } from 'react'
 import { UseFormReturn } from 'react-hook-form'
 import { schemaForm } from './schema'
 import { ModalCustom } from '@/components/custom-modal'
-import { StaticAutoComplete } from '@/components'
+import { ServerSideAutoComplete, StaticAutoComplete } from '@/components'
 import { DatePickerCustom } from '@/components/mui/custom-date-picker'
 import { queryClient } from '@/pages/_app'
 
@@ -14,6 +14,7 @@ interface Props {
     form: UseFormReturn<schemaForm>
     setStartDate: Dispatch<SetStateAction<string>>
     setEndDate: Dispatch<SetStateAction<string>>
+    setDepartment: Dispatch<SetStateAction<string>>
 }
 
 const options = [
@@ -23,12 +24,13 @@ const options = [
     { label: 'Custom', value: 'custom' },
 ]
 
-const FilterSales = ({ open, setStartDate, setEndDate, toggle, form }: Props) => {
+const FilterSales = ({ open, setStartDate, setEndDate, toggle, form, setDepartment }: Props) => {
     const { control, handleSubmit, watch, reset, setValue } = form
 
     const onSubmit = async (data: schemaForm) => {
         setStartDate(String(data?.start_date))
         setEndDate(String(data?.end_date))
+        setDepartment(String(watch("department_id")?.id))
         toggle()
     }
 
@@ -45,7 +47,7 @@ const FilterSales = ({ open, setStartDate, setEndDate, toggle, form }: Props) =>
         const defaultEnd = ''
 
         reset({
-            branch_id: null,
+            department_id: null,
             start_date: defaultStart,
             end_date: defaultEnd,
             range: { label: '1 Bulan Terakhir', value: defaultStart },
@@ -59,7 +61,17 @@ const FilterSales = ({ open, setStartDate, setEndDate, toggle, form }: Props) =>
     const endDateRange = watch('range')
     useEffect(() => {
         const selectedRange = endDateRange
-        if (!selectedRange || selectedRange.label === 'Custom') return
+
+        if (
+            !selectedRange ||
+            selectedRange.label === '' ||
+            selectedRange.value === ''
+        ) {
+            setValue('start_date', '')
+            setValue('end_date', '')
+
+            return
+        }
 
         const startDate = selectedRange.value
         const endDate = dayjs().format('YYYY-MM-DD')
@@ -78,6 +90,24 @@ const FilterSales = ({ open, setStartDate, setEndDate, toggle, form }: Props) =>
             buttonOkProps={{ onClick: handleSubmit(onSubmit), children: 'Filter' }}
         >
             <Grid container spacing={2}>
+                <Grid item xs={12}>
+                    <ServerSideAutoComplete<schemaForm, { id: number; label: string }, any>
+                        control={control}
+                        endpoint='dim_department'
+                        name='department_id'
+                        label='Departemen'
+                        formatOptions={response => {
+                            const options = response.data
+
+                            if (!options) return []
+
+                            return options.map((option: any) => ({
+                                id: option.dept_id,
+                                label: option.department,
+                            }))
+                        }}
+                    />
+                </Grid>
                 <Grid item xs={12}>
                     <StaticAutoComplete
                         options={options}

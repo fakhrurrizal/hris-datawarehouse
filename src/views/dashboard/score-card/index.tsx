@@ -5,11 +5,14 @@ import { useDashboardScoreCard } from '@/utils/queries/use-report-dashboard'
 interface Props {
     startDate: string
     endDate: string
+    departmentId:number
+
 }
-const SalesOverviewViews = ({ startDate, endDate }: Props) => {
+const SalesOverviewViews = ({ startDate, endDate, departmentId }: Props) => {
     const { data: data_filter, isLoading } = useDashboardScoreCard({
         start_date: startDate,
         end_date: endDate,
+        department_id: departmentId
     })
 
     const classNameCard = 'col-span-12 xl:col-span-3'

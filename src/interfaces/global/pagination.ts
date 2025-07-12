@@ -7,6 +7,7 @@ export interface PaginationArgs<T = any> {
     status?: any
     startDate?: string
     endDate?: string
+    department_id?: number
 }
 
 export type Order = 'desc' | 'asc'

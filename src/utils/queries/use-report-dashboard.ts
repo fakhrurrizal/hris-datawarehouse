@@ -3,10 +3,14 @@ import queryString from 'query-string'
 import { useQuery } from 'react-query'
 import { getApi } from '../helpers'
 import { ResponseScoreCardDashboard } from '../types/api-response'
+import { PaginationArgs } from '@/interfaces'
 
-export const useDashboardScoreCard = (args: any, enabled = true) => {
+export const useDashboardScoreCard = (args: any, department_id?: number) => {
     const query: Record<string, string | number> = {
         ...args,
+    }
+    if (department_id) {
+        query['department_id'] = department_id
     }
 
     const endpoint = queryString.stringifyUrl({
@@ -22,13 +26,15 @@ export const useDashboardScoreCard = (args: any, enabled = true) => {
         },
         queryKey: ['LIST_DASHBOARD_SCORECARD', query],
         refetchOnWindowFocus: false,
-        enabled,
     })
 }
 
-export const useDashboardLineChart = (args: any) => {
+export const useDashboardLineChart = (args: any, department_id?: number) => {
     const query: Record<string, string | number> = {
         ...args,
+    }
+    if (department_id) {
+        query['department_id'] = department_id
     }
 
     const endpoint = queryString.stringifyUrl({
@@ -47,9 +53,12 @@ export const useDashboardLineChart = (args: any) => {
     })
 }
 
-export const useDashboardEmployeePerRecruitmenSource = (args: any) => {
+export const useDashboardEmployeePerRecruitmenSource = (args: any, department_id?: number) => {
     const query: Record<string, string | number> = {
         ...args,
+    }
+    if (department_id) {
+        query['department_id'] = department_id
     }
 
     const endpoint = queryString.stringifyUrl({
@@ -68,9 +77,12 @@ export const useDashboardEmployeePerRecruitmenSource = (args: any) => {
     })
 }
 
-export const useDashboardLineTrendAveragePerformance = (args: any) => {
+export const useDashboardLineTrendAveragePerformance = (args: any, department_id?: number) => {
     const query: Record<string, string | number> = {
         ...args,
+    }
+    if (department_id) {
+        query['department_id'] = department_id
     }
 
     const endpoint = queryString.stringifyUrl({
@@ -89,9 +101,12 @@ export const useDashboardLineTrendAveragePerformance = (args: any) => {
     })
 }
 
-export const useDashboardAveragePerformanceScorePerDepartment = (args: any) => {
+export const useDashboardAveragePerformanceScorePerDepartment = (args: any, department_id?: number) => {
     const query: Record<string, string | number> = {
         ...args,
+    }
+    if (department_id) {
+        query['department_id'] = department_id
     }
 
     const endpoint = queryString.stringifyUrl({
@@ -110,9 +125,12 @@ export const useDashboardAveragePerformanceScorePerDepartment = (args: any) => {
     })
 }
 
-export const useDashboardEmpSatisfactionPerPosition = (args: any) => {
+export const useDashboardEmpSatisfactionPerPosition = (args: any, department_id?: number) => {
     const query: Record<string, string | number> = {
         ...args,
+    }
+    if (department_id) {
+        query['department_id'] = department_id
     }
 
     const endpoint = queryString.stringifyUrl({
@@ -131,9 +149,12 @@ export const useDashboardEmpSatisfactionPerPosition = (args: any) => {
     })
 }
 
-export const useDashboardPieChartEmployeeTerminationRatio = (args: any) => {
+export const useDashboardPieChartEmployeeTerminationRatio = (args: any, department_id?: number) => {
     const query: Record<string, string | number> = {
         ...args,
+    }
+    if (department_id) {
+        query['department_id'] = department_id
     }
 
     const endpoint = queryString.stringifyUrl({
@@ -152,9 +173,12 @@ export const useDashboardPieChartEmployeeTerminationRatio = (args: any) => {
     })
 }
 
-export const useDashboardAverageSalaryPerPosition = (args: any) => {
+export const useDashboardAverageSalaryPerPosition = (args: any, department_id?: number) => {
     const query: Record<string, string | number> = {
         ...args,
+    }
+    if (department_id) {
+        query['department_id'] = department_id
     }
 
     const endpoint = queryString.stringifyUrl({
@@ -173,9 +197,12 @@ export const useDashboardAverageSalaryPerPosition = (args: any) => {
     })
 }
 
-export const useDashboardAverageSalaryPerDepartment = (args: any) => {
+export const useDashboardAverageSalaryPerDepartment = (args: any, department_id?: number) => {
     const query: Record<string, string | number> = {
         ...args,
+    }
+    if (department_id) {
+        query['department_id'] = department_id
     }
 
     const endpoint = queryString.stringifyUrl({
@@ -194,9 +221,12 @@ export const useDashboardAverageSalaryPerDepartment = (args: any) => {
     })
 }
 
-export const useDashboarEmployeePerDepartment = (args: any) => {
+export const useDashboarEmployeePerDepartment = (args: any, department_id?: number) => {
     const query: Record<string, string | number> = {
         ...args,
+    }
+    if (department_id) {
+        query['department_id'] = department_id
     }
 
     const endpoint = queryString.stringifyUrl({
@@ -215,9 +245,12 @@ export const useDashboarEmployeePerDepartment = (args: any) => {
     })
 }
 
-export const useDashboarEmployeePerPosition = (args: any) => {
+export const useDashboarEmployeePerPosition = (args: any, department_id?: number) => {
     const query: Record<string, string | number> = {
         ...args,
+    }
+    if (department_id) {
+        query['department_id'] = department_id
     }
 
     const endpoint = queryString.stringifyUrl({
@@ -236,9 +269,12 @@ export const useDashboarEmployeePerPosition = (args: any) => {
     })
 }
 
-export const useSalaryComparison = (args: any) => {
+export const useSalaryComparison = (args: any, department_id?: number) => {
     const query: Record<string, string | number> = {
         ...args,
+    }
+    if (department_id) {
+        query['department_id'] = department_id
     }
 
     const endpoint = queryString.stringifyUrl({
@@ -257,9 +293,13 @@ export const useSalaryComparison = (args: any) => {
     })
 }
 
-export const useDashboardEmployeePerGender = (args: any) => {
+export const useDashboardEmployeePerGender = (args: any, department_id?: number) => {
     const query: Record<string, string | number> = {
         ...args,
+    }
+
+    if (department_id) {
+        query['department_id'] = department_id
     }
 
     const endpoint = queryString.stringifyUrl({
@@ -275,5 +315,45 @@ export const useDashboardEmployeePerGender = (args: any) => {
         },
         refetchOnWindowFocus: false,
         queryKey: ['LIST_DASHBOARD_EMPLOYEE_PER_GENDER', query, args],
+    })
+}
+
+export const useDashboardEmployee = (args: PaginationArgs<any>) => {
+    const { pageSize, pageIndex, searchValue, status, sort, department_id } = args
+
+    const query: Record<string, string | number> = {
+        limit: Number(pageSize),
+        page: Number(pageIndex),
+    }
+
+    if (department_id) {
+        query['department_id'] = department_id
+    }
+
+    if (searchValue) {
+        query['search'] = searchValue
+    }
+
+    if (status) {
+        query['status'] = status
+    }
+
+    if (sort) {
+        query['sort'] = sort
+    }
+
+    const endpoint = queryString.stringifyUrl({
+        url: getApi('dim') + '/fact-employment',
+        query,
+    })
+
+    return useQuery({
+        queryFn: async () => {
+            const res = await axiosInterceptor.get<any>(endpoint)
+
+            return res.data
+        },
+        refetchOnWindowFocus: false,
+        queryKey: ['LIST_EMPLOYEE', query, args],
     })
 }

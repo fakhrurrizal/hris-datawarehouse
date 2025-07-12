@@ -13,6 +13,7 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 interface Props {
     startDate: string
     endDate: string
+    departmentId: number
 }
 
 interface PieDataItem {
@@ -23,7 +24,7 @@ interface PieDataItem {
     amount_percentage: string
 }
 
-const EmployeePerResourcePieChartViews = ({ endDate, startDate }: Props) => {
+const EmployeePerResourcePieChartViews = ({ endDate, startDate, departmentId }: Props) => {
     const [open, setOpen] = useState<boolean>(false)
 
     const [openModal, setOpenModal] = useState<boolean>(false)
@@ -35,6 +36,7 @@ const EmployeePerResourcePieChartViews = ({ endDate, startDate }: Props) => {
     const { data: dataPie, isLoading } = useDashboardEmployeePerRecruitmenSource({
         start_date: startDate,
         end_date: endDate,
+        department_id: departmentId
     })
 
     const [series, setSeries] = useState<number[]>([])

@@ -14,9 +14,10 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 interface Props {
     startDate: string
     endDate: string
+    departmentId: number
 }
 
-const AveragePerformanceScorePerDepartment = ({ startDate, endDate }: Props) => {
+const AveragePerformanceScorePerDepartment = ({ startDate, endDate, departmentId }: Props) => {
     const [open, setOpen] = useState(false)
     const [openModal, setOpenModal] = useState(false)
 
@@ -26,6 +27,7 @@ const AveragePerformanceScorePerDepartment = ({ startDate, endDate }: Props) => 
     const { data: data_filter, isLoading } = useDashboardAveragePerformanceScorePerDepartment({
         start_date: startDate,
         end_date: endDate,
+        department_id: departmentId
     })
 
     const [series, setSeries] = useState([{ name: 'Jumlah', data: [] as number[] }])

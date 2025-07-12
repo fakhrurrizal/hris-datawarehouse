@@ -13,6 +13,7 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 interface Props {
     startDate: string
     endDate: string
+    departmentId:number
 }
 
 interface DataItem {
@@ -20,7 +21,7 @@ interface DataItem {
     y: number
 }
 
-const TrendRecruitmenStatisticsChartViews = ({ endDate, startDate }: Props) => {
+const TrendRecruitmenStatisticsChartViews = ({ endDate, startDate,departmentId }: Props) => {
     const [open, setOpen] = useState<boolean>(false)
 
     const [openModal, setOpenModal] = useState<boolean>(false)
@@ -34,6 +35,7 @@ const TrendRecruitmenStatisticsChartViews = ({ endDate, startDate }: Props) => {
     const { data: data_filter, isLoading } = useDashboardLineChart({
         start_date: startDate,
         end_date: endDate,
+        department_id: departmentId
     })
 
     const [series, setSeries] = useState<{ name: string; data: [number, number][] }[]>([])

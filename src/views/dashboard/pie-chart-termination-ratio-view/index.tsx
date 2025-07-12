@@ -14,9 +14,10 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 interface Props {
     startDate: string
     endDate: string
+    departmentId:number
 }
 
-const PieChartTerminationRatioView = ({ startDate, endDate }: Props) => {
+const PieChartTerminationRatioView = ({ startDate, endDate, departmentId }: Props) => {
     const [open, setOpen] = useState(false)
     const [openModal, setOpenModal] = useState(false)
 
@@ -25,7 +26,8 @@ const PieChartTerminationRatioView = ({ startDate, endDate }: Props) => {
 
     const { data, isLoading } = useDashboardPieChartEmployeeTerminationRatio({
         start_date: startDate,
-        end_date: endDate
+        end_date: endDate,
+        department_id: departmentId
     })
 
     const [series, setSeries] = useState<number[]>([])

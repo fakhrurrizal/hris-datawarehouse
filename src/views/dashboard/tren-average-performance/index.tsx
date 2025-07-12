@@ -14,9 +14,10 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 interface Props {
     startDate: string
     endDate: string
+    departmentId: number
 }
 
-const TrendAveragePerformanceViews = ({ endDate, startDate }: Props) => {
+const TrendAveragePerformanceViews = ({ endDate, startDate, departmentId }: Props) => {
     const [open, setOpen] = useState(false)
     const [openModal, setOpenModal] = useState(false)
 
@@ -26,6 +27,7 @@ const TrendAveragePerformanceViews = ({ endDate, startDate }: Props) => {
     const { data: data_filter, isLoading } = useDashboardLineTrendAveragePerformance({
         start_date: startDate,
         end_date: endDate,
+        department_id: departmentId
     })
 
     const [series, setSeries] = useState<ApexAxisChartSeries>([])
