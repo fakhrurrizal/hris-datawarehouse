@@ -357,3 +357,53 @@ export const useDashboardEmployee = (args: PaginationArgs<any>) => {
         queryKey: ['LIST_EMPLOYEE', query, args],
     })
 }
+
+export const useDashboardEmployeeMaritalStatus = (args: any, department_id?: number) => {
+    const query: Record<string, string | number> = {
+        ...args,
+    }
+
+    if (department_id) {
+        query['department_id'] = department_id
+    }
+
+    const endpoint = queryString.stringifyUrl({
+        url: getApi('dashboard') + '/piechart-employee-marital-ratio',
+        query,
+    })
+
+    return useQuery({
+        queryFn: async () => {
+            const res = await axiosInterceptor.get(endpoint)
+
+            return res?.data
+        },
+        refetchOnWindowFocus: false,
+        queryKey: ['LIST_DASHBOARD_EMPLOYEE_MARITAL_STATUS', query, args],
+    })
+}
+
+export const useDashboardEmployeeAge = (args: any, department_id?: number) => {
+    const query: Record<string, string | number> = {
+        ...args,
+    }
+
+    if (department_id) {
+        query['department_id'] = department_id
+    }
+
+    const endpoint = queryString.stringifyUrl({
+        url: getApi('dashboard') + '/piechart-employee-age-ratio',
+        query,
+    })
+
+    return useQuery({
+        queryFn: async () => {
+            const res = await axiosInterceptor.get(endpoint)
+
+            return res?.data
+        },
+        refetchOnWindowFocus: false,
+        queryKey: ['LIST_DASHBOARD_EMPLOYEE_AGE', query, args],
+    })
+}

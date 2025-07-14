@@ -19,4 +19,5 @@ export interface ResponseScoreCardDashboard {
     turnover_percentage: number
     average_performance: number
     average_days_late_last30: number
+    total_salary_expenditure: number
 }

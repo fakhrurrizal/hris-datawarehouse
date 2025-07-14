@@ -5,6 +5,7 @@ import CustomStyledTableContainer from "@/components/custom-table/table/custom-s
 import { CustomStyledTableData, CustomStyledTableHead } from "@/components/custom-table/table/custom-styled-table-head"
 import CustomStyledTableRow from "@/components/custom-table/table/custom-styled-table-row"
 import TableHeaderCustomTable from "@/components/custom-table/table/header"
+import { formatNumberWithSeparator } from "@/utils/helpers/format-number.helper"
 import { useDashboardEmployee } from "@/utils/queries/use-report-dashboard"
 import { SelectChangeEvent } from "@mui/material"
 import dayjs from "dayjs"
@@ -29,7 +30,15 @@ const HeaderItems = [
         alignCenter: false,
     },
     {
+        label: 'Status Pernikahan',
+        alignCenter: false,
+    },
+    {
         label: 'Tanggal Masuk',
+        alignCenter: false,
+    },
+    {
+        label: 'Gaji',
         alignCenter: false,
     },
     {
@@ -46,7 +55,7 @@ const HeaderItems = [
 interface Props {
     startDate: string
     endDate: string
-    departmentId:number
+    departmentId: number
 }
 
 const TableFactEmployment = ({ endDate, startDate, departmentId }: Props) => {
@@ -91,7 +100,9 @@ const TableFactEmployment = ({ endDate, startDate, departmentId }: Props) => {
 
                                             <CustomStyledTableData>{item?.department}</CustomStyledTableData>
                                             <CustomStyledTableData>{item?.gender === 'F' ? "Perempuan" : "Laki-laki"}</CustomStyledTableData>
+                                            <CustomStyledTableData>{item?.marital_desc}</CustomStyledTableData>
                                             <CustomStyledTableData>{dayjs(item?.date_of_hire).format('DD MMMM YYYY')}</CustomStyledTableData>
+                                            <CustomStyledTableData>${formatNumberWithSeparator(item?.salary)}</CustomStyledTableData>
                                             <CustomStyledTableData>{item?.citizen_desc}</CustomStyledTableData>
                                             <CustomStyledTableData className="text-center">{item?.state}</CustomStyledTableData>
 

@@ -42,15 +42,24 @@ const FilterSales = ({ open, setStartDate, setEndDate, toggle, form, setDepartme
         queryClient.invalidateQueries({ queryKey: ['LIST_DASHBOARD_AVERAGE_PERFORMANCE_SCORE_PER_DEPARTMENT'] })
         queryClient.invalidateQueries({ queryKey: ['LIST_DASHBOARD_EMP_SATISFACTION_PER_POSITION'] })
         queryClient.invalidateQueries({ queryKey: ['LIST_DASHBOARD_PIE_CHART_EMPLOYEE_TERMINATION_RATIO'] })
+        queryClient.invalidateQueries({ queryKey: ['LIST_DASHBOARD_AVERAGE_SALARY_PER_POSITION'] })
+        queryClient.invalidateQueries({ queryKey: ['LIST_DASHBOARD_AVERAGE_SALARY_PER_DEPARTMENT'] })
+        queryClient.invalidateQueries({ queryKey: ['LIST_DASHBOARD_EMPLOYEE_PER_DEPARTMENT'] })
+        queryClient.invalidateQueries({ queryKey: ['LIST_DASHBOARD_EMPLOYEE_PER_POSITION'] })
+        queryClient.invalidateQueries({ queryKey: ['LIST_DASHBOARD_SALARY_COMPARISON'] })
+        queryClient.invalidateQueries({ queryKey: ['LIST_DASHBOARD_EMPLOYEE_PER_GENDER'] })
+        queryClient.invalidateQueries({ queryKey: ['LIST_EMPLOYEE'] })
+        queryClient.invalidateQueries({ queryKey: ['LIST_DASHBOARD_EMPLOYEE_MARITAL_STATUS'] })
+        queryClient.invalidateQueries({ queryKey: ['LIST_DASHBOARD_EMPLOYEE_AGE'] })
 
         const defaultStart = ''
         const defaultEnd = ''
-
+        setDepartment('')
         reset({
             department_id: null,
             start_date: defaultStart,
             end_date: defaultEnd,
-            range: { label: '1 Bulan Terakhir', value: defaultStart },
+            range: { label: '', value: defaultStart },
         })
 
         setStartDate(defaultStart)

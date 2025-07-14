@@ -2,7 +2,7 @@ import { ModalCustom } from '@/components/custom-modal'
 import { ScoreCard } from '@/components/dashboard/score-card'
 import EmptyDataTableCustom from '@/components/table/empty-data'
 import { formatNumberWithSeparator } from '@/utils/helpers/format-number.helper'
-import { useDashboardEmployeePerGender } from '@/utils/queries/use-report-dashboard'
+import { useDashboardEmployeeAge } from '@/utils/queries/use-report-dashboard'
 import { CircularProgress } from '@mui/material'
 import { ApexOptions } from 'apexcharts'
 import dynamic from 'next/dynamic'
@@ -24,7 +24,7 @@ interface PieDataItem {
     amount_percentage: string
 }
 
-const EmployeePerGenderPieChartViews = ({ endDate, startDate, departmentId }: Props) => {
+const EmployeeAgeViews = ({ endDate, startDate, departmentId }: Props) => {
     const [open, setOpen] = useState<boolean>(false)
 
     const [openModal, setOpenModal] = useState<boolean>(false)
@@ -33,7 +33,7 @@ const EmployeePerGenderPieChartViews = ({ endDate, startDate, departmentId }: Pr
 
     const toggleModal = () => setOpenModal(!openModal)
 
-    const { data: dataPie, isLoading } = useDashboardEmployeePerGender({
+    const { data: dataPie, isLoading } = useDashboardEmployeeAge({
         start_date: startDate,
         end_date: endDate,
         department_id: departmentId
@@ -46,7 +46,7 @@ const EmployeePerGenderPieChartViews = ({ endDate, startDate, departmentId }: Pr
         if (dataPie) {
             const newSeries = dataPie?.map((item: PieDataItem) => item.total)
             const newLabels = dataPie?.map((item: PieDataItem) =>
-                item.name === 'M' ? 'Laki-laki' : item.name === 'F' ? 'Perempuan' : item.name
+                item.name
             )
             setSeries(newSeries)
             setLabels(newLabels)
@@ -89,7 +89,7 @@ const EmployeePerGenderPieChartViews = ({ endDate, startDate, departmentId }: Pr
     return (
         <>
             <ScoreCard
-                title='Komposisi Gender Karyawan'
+                title='Rasio Karyawan Menurut Usia'
                 type='chart'
                 toggleZoom={toggleModal}
                 toggleFilter={toggle}
@@ -114,7 +114,7 @@ const EmployeePerGenderPieChartViews = ({ endDate, startDate, departmentId }: Pr
                 <ModalCustom maxWidth='md' title='' toggle={toggleModal} hiddenClose open={openModal} hideButton>
                     <ScoreCard
                         zoom={openModal}
-                        title='Komposisi Gender Karyawan'
+                        title='Rasio Karyawan Menurut Usia'
                         type='chart'
                         toggleZoom={toggleModal}
                         toggleFilter={toggle}
@@ -129,4 +129,4 @@ const EmployeePerGenderPieChartViews = ({ endDate, startDate, departmentId }: Pr
     )
 }
 
-export default EmployeePerGenderPieChartViews
+export default EmployeeAgeViews

@@ -5,7 +5,7 @@ import { useDashboardScoreCard } from '@/utils/queries/use-report-dashboard'
 interface Props {
     startDate: string
     endDate: string
-    departmentId:number
+    departmentId: number
 
 }
 const SalesOverviewViews = ({ startDate, endDate, departmentId }: Props) => {
@@ -15,8 +15,8 @@ const SalesOverviewViews = ({ startDate, endDate, departmentId }: Props) => {
         department_id: departmentId
     })
 
-    const classNameCard = 'col-span-12 xl:col-span-3'
-    const classNameDiv = 'grid grid-cols-12  gap-3 items-stretch'
+    const classNameCard = 'col-span-1'
+    const classNameDiv = 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-3 items-stretch'
 
     return (
         <>
@@ -61,6 +61,17 @@ const SalesOverviewViews = ({ startDate, endDate, departmentId }: Props) => {
                         isLoading={isLoading}
                     />
                 </div>
+                <div className={classNameCard}>
+                    <ScoreCardItem
+                        title='Biaya Total Pengeluaran Gaji'
+                        value={`$ ${formatNumberWithSeparator(data_filter?.total_salary_expenditure || 0)}`}
+                        icon='mdi:cash-multiple'
+                        iconColor='#10b981'
+                        bgColor='#d1fae5'
+                        isLoading={isLoading}
+                    />
+                </div>
+
             </div>
         </>
     )
