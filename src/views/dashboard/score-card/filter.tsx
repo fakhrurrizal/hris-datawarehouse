@@ -91,7 +91,11 @@ const FilterSales = ({ open, setStartDate, setEndDate, toggle, form, setDepartme
 
         const year = selectedRange.value
         const startDate = `${year}-01-01`
-        const endDate = `${year}-12-31`
+
+        const isCurrentYear = Number(year) === dayjs().year()
+        const endDate = isCurrentYear
+            ? dayjs().format('YYYY-MM-DD')
+            : `${year}-12-31`
 
         setValue('start_date', startDate)
         setValue('end_date', endDate)
