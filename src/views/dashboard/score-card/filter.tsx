@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material'
 import dayjs from 'dayjs'
-import { Dispatch, SetStateAction, useEffect } from 'react'
+import { Dispatch, SetStateAction, useEffect, useMemo } from 'react'
 import { UseFormReturn } from 'react-hook-form'
 import { schemaForm } from './schema'
 import { ModalCustom } from '@/components/custom-modal'
@@ -17,12 +17,6 @@ interface Props {
     setDepartment: Dispatch<SetStateAction<string>>
 }
 
-const options = [
-    { label: '1 Bulan Terakhir', value: dayjs().subtract(1, 'month').format('YYYY-MM-DD') },
-    { label: '1 Tahun Terakhir', value: dayjs().subtract(1, 'year').format('YYYY-MM-DD') },
-    { label: '3 Tahun Terakhir', value: dayjs().subtract(3, 'year').format('YYYY-MM-DD') },
-    { label: 'Custom', value: 'custom' },
-]
 
 const FilterSales = ({ open, setStartDate, setEndDate, toggle, form, setDepartment }: Props) => {
     const { control, handleSubmit, watch, reset, setValue } = form
@@ -33,6 +27,24 @@ const FilterSales = ({ open, setStartDate, setEndDate, toggle, form, setDepartme
         setDepartment(String(watch("department_id")?.id))
         toggle()
     }
+
+    const options = useMemo(() => {
+        const currentYear = dayjs().year()
+        const years = []
+        for (let year = currentYear; year >= 2018; year--) {
+            years.push({
+                label: String(year),
+                value: String(year),
+            })
+        }
+
+        years.push({
+            label: 'Custom',
+            value: 'custom',
+        })
+
+        return years
+    }, [])
 
     const handleDelete = () => {
         queryClient.invalidateQueries({ queryKey: ['LIST_DASHBOARD_SCORECARD'] })
@@ -67,27 +79,24 @@ const FilterSales = ({ open, setStartDate, setEndDate, toggle, form, setDepartme
         toggle()
     }
 
-    const endDateRange = watch('range')
-    useEffect(() => {
-        const selectedRange = endDateRange
+    const selectedRange = watch('range')
 
-        if (
-            !selectedRange ||
-            selectedRange.label === '' ||
-            selectedRange.value === ''
-        ) {
+    useEffect(() => {
+        if (!selectedRange?.value || selectedRange.value === 'custom') {
             setValue('start_date', '')
             setValue('end_date', '')
 
             return
         }
 
-        const startDate = selectedRange.value
-        const endDate = dayjs().format('YYYY-MM-DD')
+        const year = selectedRange.value
+        const startDate = `${year}-01-01`
+        const endDate = `${year}-12-31`
 
         setValue('start_date', startDate)
         setValue('end_date', endDate)
-    }, [endDateRange, setValue])
+    }, [selectedRange, setValue])
+
 
     return (
         <ModalCustom
