@@ -22,14 +22,20 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
    ```bash
    git clone https://github.com/fakhrurrizal/hris-datawarehouse
    cd hris-datawarehouse
+
+2. **Buat file .env**
+   - Masukan code dibawah ini
+   ```bash
+   NEXT_PUBLIC_API=https://api-hris-datawarehouse.fakhrurcodes.my.id
+   NEXT_PUBLIC_VERSION_API=v1
    
-2. **Install dependencies**
+3. **Install dependencies**
    ```bash
    npm install
 
-3. **Jalankan server**
+4. **Jalankan server**
    ```bash
    npm run dev
 
-3. **Buka browser**
+5. **Buka browser**
    akses http://localhost:3000
